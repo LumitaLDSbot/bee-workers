@@ -1,0 +1,47 @@
+{
+  "name": "bee-workers",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marketplace de turnos puntuales en hostelería y restauración en Porto",
+  "scripts": {
+    "dev": "next dev -p 3004",
+    "build": "next build",
+    "start": "next start -p 3004",
+    "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "generate:vapid": "node scripts/generate-vapid-keys.mjs",
+    "generate:icons": "node scripts/generate-icons.mjs",
+    "deploy": "bash scripts/deploy.sh"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.45.4",
+    "next": "14.2.15",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-hook-form": "^7.53.0",
+    "sharp": "^0.33.5",
+    "web-push": "^3.6.7",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^20.16.10",
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.0",
+    "@types/web-push": "^3.6.3",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

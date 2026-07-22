@@ -1,0 +1,1 @@
+// Page component for ratings

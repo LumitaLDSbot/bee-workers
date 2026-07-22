@@ -1,0 +1,3 @@
+-- Bee Workers Dashboards migration
+-- Adds admin, favorites, settings, disputes tables and dashboard functions
+-- See qwen-prompt4-output.md section 1 for full SQL

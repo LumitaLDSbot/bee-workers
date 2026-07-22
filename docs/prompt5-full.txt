@@ -1,0 +1,86 @@
+Bee Workers es una plataforma PWA (Next.js 14 + Supabase) que conecta trabajadores autónomos (recibos verdes) con empleadores de hostelería y restauración en Porto, Portugal, para turnos puntuales y temporales.
+
+Modelo: Marketplace (agência de colocação). La plataforma NO es empleadora. Workers facturan directamente al employer. La plataforma cobra 5% de comisión.
+
+IMPORTANTE: La plataforma NO retiene IRS ni Segurança Social. El worker recibe el bruto menos la comisión (5%) y es responsable de declarar y pagar sus propios impuestos. La app muestra estimaciones orientativas pero el pago real de impuestos es responsabilidad exclusiva del worker.
+
+Stack: Next.js 14 (App Router), TypeScript, Supabase (PostgreSQL + Auth + Storage + Realtime), Tailwind CSS, PWA mobile-first.
+
+Legal clave (Portugal):
+- Workers deben ser trabalhadores independentes (recibos verdes)
+- Seguro de acidentes de trabalho obligatorio (Lei 98/2009)
+- Art. 12.º-A CT: NO fijar precios, NO controlar horarios, NO penalizar rechazo de turnos
+- IVA: exento si factura < €15.000/año
+- IRS: Categoría B, tributa sobre 75% del bruto
+- Segurança Social: 21.4% sobre 70% del bruto (12 meses exento al iniciar)
+
+Diseño visual: Paleta de colores:
+- Amarillo abeja: #FFB800 (primario, CTAs, acentos)
+- Negro suave: #1A1A1A (texto, nunca negro absoluto)
+- Blanco crema: #FFFAF0 (fondos claros)
+- Gris claro: #F5F5F0 (fondos de cards)
+- Gris medio: #8B8B8B (texto secundario)
+- Amarillo oscuro: #E0A800 (hover states)
+- Motivo visual: hexágonos (colmena) sutiles en UI
+- Tipografía: Space Grotesk
+- Estilo: limpio, minimalista, mobile-first, inspirado en Uber con identidad propia
+
+Eres un DevOps y QA senior. Finaliza Bee Workers (Next.js 14 + Supabase) como PWA instalable y despliegue en producción.
+
+### 1. PWA CONFIGURATION
+- manifest.json completo (iconos, nombre, colores, display standalone)
+- Service Worker con next-pwa o manual:
+  - Cache de páginas estáticas
+  - Offline fallback page
+  - Background sync para aplicaciones a turnos
+- Instalable en iOS y Android (Add to Home Screen)
+- Push notifications (Web Push API + VAPID keys)
+- Splash screen
+
+### 2. PERFORMANCE
+- next.config.js optimizado (images, compression, headers)
+- Lazy loading de componentes pesados
+- Optimización de imágenes (next/image con Supabase Storage)
+- Code splitting por ruta
+- Prefetch de rutas probables
+
+### 3. DOCKER SETUP
+- Dockerfile multi-stage (build + production)
+- docker-compose.yml con:
+  - Next.js app
+  - Supabase local (para dev) o apuntar a cloud
+  - Traefik labels para routing HTTPS
+- .env.example con todas las variables necesarias
+- Health check endpoint
+
+### 4. DEPLOY EN VPS#2
+- Script de deploy (deploy.sh) para VPS#2 (5.189.159.232)
+- Traefik labels: bee-workers.lumodigitalsolutions.com
+- HTTPS automático con Let's Encrypt
+- Puerto interno: 3004
+- Variables de entorno: NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY
+
+### 5. TESTING
+- Tests unitarios con Vitest para:
+  - Cálculo de neto del worker
+  - Validación de formularios (Zod schemas)
+  - Funciones utilitarias (formatPrice, calculateDistance, etc.)
+- Tests de integración para:
+  - Flujo de registro (worker y employer)
+  - Publicar turno → aplicar → aceptar → check-in → check-out → rating
+- Tests E2E con Playwright para flujos críticos
+
+### 6. SEO + ANALYTICS
+- Metadata por página (Open Graph, Twitter Cards)
+- sitemap.xml dinámico
+- robots.txt
+- Schema.org structured data (JobPosting para turnos públicos)
+- Google Analytics 4 o Plausible (privacy-friendly)
+
+### 7. DOCUMENTACIÓN
+- README.md actualizado con setup completo
+- DEPLOY.md con pasos de despliegue
+- CONTRIBUTING.md
+- .env.example documentado
+
+Genera todos los archivos completos, listos para usar. Comentarios en español. Configuración lista para producción.

@@ -1,0 +1,16 @@
+node_modules
+.next
+.git
+.gitignore
+.env
+.env.local
+.env.production
+npm-debug.log
+README.md
+DEPLOY.md
+CONTRIBUTING.md
+tests
+e2e
+playwright-report
+test-results
+coverage

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bee Workers — Design System Preview</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+  :root {
+    --bee-yellow: #FFB800;
+    --bee-yellow-dark: #E0A800;
+    --bee-yellow-light: #FFF4D6;
+    --bee-black: #1A1A1A;
+    --bee-black-soft: #2D2D2D;
+    --bee-cream: #FFFAF0;
+    --bee-gray-light: #F5F5F0;
+    --bee-gray-medium: #8B8B8B;
+    --bee-gray-border: #E5E5E0;
+    --bee-white: #FFFFFF;
+    --bee-success: #4CAF50;
+    --bee-danger: #E57373;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bee-cream);
+    color: var(--bee-black);
+    min-height: 100vh;
+  }
+
+  /* Hexagon pattern background */
+  .hex-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='56' height='100' viewBox='0 0 56 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 66L0 50V16L28 0L56 16V50L28 66Z' fill='none' stroke='%23FFB800' stroke-width='0.5' opacity='0.08'/%3E%3Cpath d='M28 100L0 84V50L28 34L56 50V84L28 100Z' fill='none' stroke='%23FFB800' stroke-width='0.5' opacity='0.08'/%3E%3C/svg%3E");
+  }
+
+  .container {
+    max-width: 420px;
+    margin: 0 auto;
+    background: var(--bee-cream);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Header */
+  .header {
+    background: var(--bee-cream);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--bee-gray-border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--bee-black);
+  }
+
+  .hexagon-logo {
+    width: 32px;
+    height: 32px;
+    background: var(--bee-yellow);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .badge-icon {
+    width: 24px;
+    height: 24px;
+    background: var(--bee-gray-light);
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .badge-icon::after {
+    content: '3';
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: var(--bee-yellow);
+    color: var(--bee-black);
+    font-size: 10px;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Welcome */
+  .welcome {
+    padding: 24px 20px 16px;
+  }
+
+  .welcome h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .welcome p {
+    color: var(--bee-gray-medium);
+    font-size: 14px;
+  }
+
+  /* Shift cards */
+  .shifts-section {
+    padding: 0 20px 20px;
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bee-gray-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .shift-card {
+    background: var(--bee-white);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 12px;
+    border: 1px solid var(--bee-gray-border);
+    transition: all 0.2s ease;
+  }
+
+  .shift-card:hover {
+    border-color: var(--bee-yellow);
+    box-shadow: 0 4px 16px rgba(255, 184, 0, 0.12);
+  }
+
+  .shift-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .shift-title {
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 2px;
+  }
+
+  .shift-company {
+    font-size: 13px;
+    color: var(--bee-gray-medium);
+  }
+
+  .shift-rate {
+    background: var(--bee-yellow-light);
+    color: var(--bee-black);
+    font-weight: 700;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+
+  .shift-details {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--bee-gray-medium);
+    margin-bottom: 12px;
+  }
+
+  .shift-detail {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .shift-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--bee-gray-border);
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .stars {
+    color: var(--bee-yellow);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .distance {
+    font-size: 12px;
+    color: var(--bee-gray-medium);
+  }
+
+  .btn-apply {
+    background: var(--bee-yellow);
+    color: var(--bee-black);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 24px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+  }
+
+  .btn-apply:hover {
+    background: var(--bee-yellow-dark);
+    transform: translateY(-1px);
+  }
+
+  /* Net calculator card */
+  .calc-card {
+    margin: 0 20px 20px;
+    background: var(--bee-white);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid var(--bee-gray-border);
+  }
+
+  .calc-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bee-gray-medium);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .calc-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 14px;
+  }
+
+  .calc-row.total {
+    border-top: 2px solid var(--bee-yellow);
+    margin-top: 8px;
+    padding-top: 12px;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--bee-black);
+  }
+
+  .calc-row .label {
+    color: var(--bee-gray-medium);
+  }
+
+  .calc-row .value {
+    font-weight: 500;
+  }
+
+  .calc-row .value.deduct {
+    color: var(--bee-danger);
+  }
+
+  /* Bottom nav */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    background: var(--bee-white);
+    border-top: 1px solid var(--bee-gray-border);
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0 16px;
+    z-index: 10;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--bee-gray-medium);
+    cursor: pointer;
+  }
+
+  .nav-item.active {
+    color: var(--bee-yellow-dark);
+  }
+
+  .nav-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+  }
+
+  .nav-item.active .nav-icon {
+    background: var(--bee-yellow-light);
+  }
+
+  /* Palette section */
+  .palette-section {
+    padding: 24px 20px 100px;
+    border-top: 1px solid var(--bee-gray-border);
+    margin-top: 8px;
+  }
+
+  .palette-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .color-swatch {
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+    font-size: 11px;
+  }
+
+  .color-swatch .hex {
+    font-weight: 600;
+    margin-top: 4px;
+    font-size: 10px;
+  }
+
+  .color-swatch .name {
+    font-size: 10px;
+  }
+
+  /* Badge */
+  .verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    background: var(--bee-yellow-light);
+    color: var(--bee-black);
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .hex-avatar {
+    width: 40px;
+    height: 40px;
+    background: var(--bee-gray-light);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--bee-gray-medium);
+  }
+</style>
+</head>
+<body>
+
+<div class="container hex-pattern">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <div class="hexagon-logo">🐝</div>
+      Bee Workers
+    </div>
+    <div class="badge-icon"></div>
+  </div>
+
+  <!-- Welcome -->
+  <div class="welcome">
+    <h1>Turnos cerca de ti</h1>
+    <p>3 turnos disponibles en Porto</p>
+  </div>
+
+  <!-- Shift cards -->
+  <div class="shifts-section">
+    <div class="section-title">Disponibles ahora</div>
+
+    <!-- Shift 1 -->
+    <div class="shift-card">
+      <div class="shift-header">
+        <div>
+          <div class="shift-title">Cocinero — Turno noche</div>
+          <div class="shift-company">Restaurante Cantinho Porto</div>
+        </div>
+        <div class="shift-rate">€12/h</div>
+      </div>
+      <div class="shift-details">
+        <div class="shift-detail">📅 Hoy 22:00-06:00</div>
+        <div class="shift-detail">⏱ 8h</div>
+      </div>
+      <div class="shift-footer">
+        <div class="rating">
+          <span class="stars">★★★★★</span>
+          4.8 · 127 turnos
+        </div>
+        <div class="distance">📍 1.2 km</div>
+      </div>
+      <div style="margin-top: 12px;">
+        <button class="btn-apply">Aplicar</button>
+      </div>
+    </div>
+
+    <!-- Shift 2 -->
+    <div class="shift-card">
+      <div class="shift-header">
+        <div>
+          <div class="shift-title">Mesero — Almuerzo</div>
+          <div class="shift-company">Café Majestic</div>
+        </div>
+        <div class="shift-rate">€10/h</div>
+      </div>
+      <div class="shift-details">
+        <div class="shift-detail">📅 Mañana 12:00-17:00</div>
+        <div class="shift-detail">⏱ 5h</div>
+      </div>
+      <div class="shift-footer">
+        <div class="rating">
+          <span class="stars">★★★★☆</span>
+          4.2 · 89 turnos
+        </div>
+        <div class="distance">📍 2.8 km</div>
+      </div>
+      <div style="margin-top: 12px;">
+        <button class="btn-apply">Aplicar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Net calculator -->
+  <div class="calc-card">
+    <div class="calc-title">💰 Cálculo de neto — Turno noche</div>
+    <div class="calc-row">
+      <span class="label">Bruto (€12/h × 8h)</span>
+      <span class="value">€96,00</span>
+    </div>
+    <div class="calc-row">
+      <span class="label">Comisión Bee Workers (7%)</span>
+      <span class="value deduct">−€6,72</span>
+    </div>
+    <div class="calc-row">
+      <span class="label">Retención IRS (23%)</span>
+      <span class="value deduct">−€22,08</span>
+    </div>
+    <div class="calc-row">
+      <span class="label">Segurança Social (21,4% × 70%)</span>
+      <span class="value deduct">−€14,41</span>
+    </div>
+    <div class="calc-row total">
+      <span>Neto estimado</span>
+      <span>€52,79</span>
+    </div>
+    <div style="margin-top: 8px; font-size: 11px; color: var(--bee-gray-medium);">
+      * IVA exento (facturación &lt; €15.000/año)
+    </div>
+  </div>
+
+  <!-- Verified badge example -->
+  <div class="shifts-section">
+    <div class="section-title">Perfil del worker</div>
+    <div class="shift-card" style="display: flex; gap: 12px; align-items: center;">
+      <div class="hex-avatar">JM</div>
+      <div style="flex: 1;">
+        <div style="font-weight: 600; font-size: 15px;">João Martins</div>
+        <div style="font-size: 13px; color: var(--bee-gray-medium); margin: 2px 0;">Cocinero · Mesero</div>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+          <span class="verified-badge">✓ NIF</span>
+          <span class="verified-badge">✓ Autónomo</span>
+          <span class="verified-badge">✓ Seguro</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Palette section -->
+  <div class="palette-section">
+    <div class="section-title">Paleta de colores</div>
+    <div class="palette-grid">
+      <div class="color-swatch" style="background: #FFB800; color: #1A1A1A;">
+        <div class="name">Amarillo Abeja</div>
+        <div class="hex">#FFB800</div>
+      </div>
+      <div class="color-swatch" style="background: #E0A800; color: #FFFAF0;">
+        <div class="name">Amarillo Oscuro</div>
+        <div class="hex">#E0A800</div>
+      </div>
+      <div class="color-swatch" style="background: #FFF4D6; color: #1A1A1A;">
+        <div class="name">Amarillo Claro</div>
+        <div class="hex">#FFF4D6</div>
+      </div>
+      <div class="color-swatch" style="background: #1A1A1A; color: #FFB800;">
+        <div class="name">Negro Suave</div>
+        <div class="hex">#1A1A1A</div>
+      </div>
+      <div class="color-swatch" style="background: #FFFAF0; color: #1A1A1A; border: 1px solid #E5E5E0;">
+        <div class="name">Blanco Crema</div>
+        <div class="hex">#FFFAF0</div>
+      </div>
+      <div class="color-swatch" style="background: #F5F5F0; color: #1A1A1A;">
+        <div class="name">Gris Claro</div>
+        <div class="hex">#F5F5F0</div>
+      </div>
+      <div class="color-swatch" style="background: #8B8B8B; color: #FFFAF0;">
+        <div class="name">Gris Medio</div>
+        <div class="hex">#8B8B8B</div>
+      </div>
+      <div class="color-swatch" style="background: #E5E5E0; color: #1A1A1A;">
+        <div class="name">Gris Borde</div>
+        <div class="hex">#E5E5E0</div>
+      </div>
+      <div class="color-swatch" style="background: #4CAF50; color: #FFFAF0;">
+        <div class="name">Éxito</div>
+        <div class="hex">#4CAF50</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom nav -->
+  <div class="bottom-nav">
+    <div class="nav-item active">
+      <div class="nav-icon">🏠</div>
+      Inicio
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon">🔍</div>
+      Buscar
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon">📋</div>
+      Mis turnos
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon">👤</div>
+      Perfil
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

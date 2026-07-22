@@ -1,0 +1,3 @@
+-- Bee Workers Core migration
+-- Extends base schema with shifts slots, applications message, payments fields, etc.
+-- See qwen-prompt3-output.md section 1 for full SQL

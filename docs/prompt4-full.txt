@@ -1,0 +1,93 @@
+Bee Workers es una plataforma PWA (Next.js 14 + Supabase) que conecta trabajadores autónomos (recibos verdes) con empleadores de hostelería y restauración en Porto, Portugal, para turnos puntuales y temporales.
+
+Modelo: Marketplace (agência de colocação). La plataforma NO es empleadora. Workers facturan directamente al employer. La plataforma cobra 5% de comisión.
+
+IMPORTANTE: La plataforma NO retiene IRS ni Segurança Social. El worker recibe el bruto menos la comisión (5%) y es responsable de declarar y pagar sus propios impuestos. La app muestra estimaciones orientativas pero el pago real de impuestos es responsabilidad exclusiva del worker.
+
+Stack: Next.js 14 (App Router), TypeScript, Supabase (PostgreSQL + Auth + Storage + Realtime), Tailwind CSS, PWA mobile-first.
+
+Legal clave (Portugal):
+- Workers deben ser trabalhadores independentes (recibos verdes)
+- Seguro de acidentes de trabalho obligatorio (Lei 98/2009)
+- Art. 12.º-A CT: NO fijar precios, NO controlar horarios, NO penalizar rechazo de turnos
+- IVA: exento si factura < €15.000/año
+- IRS: Categoría B, tributa sobre 75% del bruto
+- Segurança Social: 21.4% sobre 70% del bruto (12 meses exento al iniciar)
+
+Diseño visual: Paleta de colores:
+- Amarillo abeja: #FFB800 (primario, CTAs, acentos)
+- Negro suave: #1A1A1A (texto, nunca negro absoluto)
+- Blanco crema: #FFFAF0 (fondos claros)
+- Gris claro: #F5F5F0 (fondos de cards)
+- Gris medio: #8B8B8B (texto secundario)
+- Amarillo oscuro: #E0A800 (hover states)
+- Motivo visual: hexágonos (colmena) sutiles en UI (patrones de fondo, bordes decorativos, avatars con shape hexagonal)
+- Tipografía: Space Grotesk (sans-serif limpia y moderna)
+- Estilo: limpio, minimalista, mobile-first, inspirado en Uber con identidad propia
+
+Eres un desarrollador Full Stack senior. Implementa los dashboards, perfiles, panel de administración y landing page de Bee Workers (Next.js 14 + Supabase).
+
+### 1. DASHBOARD WORKER
+- Resumen: turnos esta semana, ingresos del mes, rating actual, próximos turnos
+- Gráfico de ingresos mensuales (Chart simple con CSS o SVG, sin librerías pesadas)
+- Lista de próximos turnos (con opción de cancelar si faltan >24h)
+- Historial de turnos completados (con paginación)
+- Tracking de facturación anual: barra de progreso hacia límite de IVA (€15.000)
+- Alerta si se acerca al límite: "Te quedan €X antes de tener que cobrar IVA"
+
+### 2. DASHBOARD EMPLOYER
+- Resumen: turnos activos, workers contratados este mes, rating de la empresa
+- Lista de turnos publicados (activos, completados, cancelados)
+- Workers favoritos (lista de workers con buena experiencia previa)
+- Gasto total del mes en turnos
+- Gráfico de uso mensual (SVG simple, sin librerías)
+
+### 3. PERFIL WORKER (público)
+- Foto, nombre, profesiones, skills
+- Rating con estrellas + total de trabajos completados
+- Verificado (badge: NIF ✓, Autónomo ✓, Seguro ✓)
+- Comentarios recientes de employers (sin nombre del employer por privacidad)
+- Disponibilidad actual (activo/inactivo toggle)
+- Editar precio/hora, radio de trabajo, profesiones
+
+### 4. PERFIL EMPLOYER (público)
+- Logo, nombre de empresa, dirección
+- Rating con estrellas + total de turnos completados
+- Verificado (badge: NIF empresa ✓)
+- Comentarios recientes de workers
+- Editar info de empresa
+
+### 5. CONFIGURACIÓN (ambos)
+- Editar datos personales
+- Cambiar foto/logo
+- Notificaciones (toggle por tipo)
+- Idioma (PT, ES, EN)
+- Dark mode
+- Eliminar cuenta (con confirmación + período de gracia de 30 días)
+
+### 6. PANEL ADMIN (Bee Workers staff)
+- Solo accesible para rol 'admin'
+- Lista de workers (con filtros: verificados, pendientes, bloqueados)
+- Lista de employers (con filtros)
+- Verificación manual de documentos (KYC review)
+- Métricas: usuarios activos, turnos/mes, GMV (gross merchandise value), comisiones
+- Gestión de disputas (si un worker o employer reporta un problema)
+- Ban/suspender usuarios
+
+### 7. PÁGINA LANDING (pública)
+- Hero: "Be a Worker. Bee a Worker." + CTA registro
+- Cómo funciona (worker y employer, dos columnas)
+- Beneficios clave (bidireccional, geolocation, verified profiles)
+- Testimonios (placeholder)
+- FAQ
+- Footer con links legales (Terms, Privacy, Contacto)
+
+Genera:
+- Todos los componentes React con TypeScript
+- Diseño mobile-first tipo Uber (limpio, minimalista)
+- Tailwind CSS con amarillo abeja #FFB800, negro suave #1A1A1A, blanco crema #FFFAF0, motivo hexagonal sutil
+- Charts simples (sin librerías pesadas, usar CSS/SVG)
+- Estados de carga y error
+- Componentes reutilizables (Card, Badge, RatingStars, ProgressBar, Avatar, etc.)
+- Responsive: mobile, tablet, desktop
+- Comentarios en español

@@ -1,0 +1,37 @@
+services:
+  bee-workers:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL}
+        NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY}
+        NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
+        NEXT_PUBLIC_VAPID_PUBLIC_KEY: ${NEXT_PUBLIC_VAPID_PUBLIC_KEY}
+        NEXT_PUBLIC_PLAUSIBLE_DOMAIN: ${NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
+    container_name: bee-workers
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: 3004
+      HOSTNAME: 0.0.0.0
+    networks:
+      - web
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.bee-workers.rule=Host(`bee-workers.lumodigitalsolutions.com`)
+      - traefik.http.routers.bee-workers.entrypoints=websecure
+      - traefik.http.routers.bee-workers.tls=true
+      - traefik.http.routers.bee-workers.tls.certresolver=letsencrypt
+      - traefik.http.services.bee-workers.loadbalancer.server.port=3004
+      - traefik.http.routers.bee-workers-http.rule=Host(`bee-workers.lumodigitalsolutions.com`)
+      - traefik.http.routers.bee-workers-http.entrypoints=web
+      - traefik.http.routers.bee-workers-http.middlewares=redirect-to-https
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https
+      - traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true
+
+networks:
+  web:
+    external: true

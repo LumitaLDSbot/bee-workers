@@ -1,3 +1,5 @@
+import type { WorkerProfile } from '@/types';
+
 export type ShiftStatus =
   | 'draft'
   | 'published'

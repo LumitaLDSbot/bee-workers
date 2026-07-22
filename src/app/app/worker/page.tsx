@@ -8,7 +8,8 @@ import { WorkerNav } from '@/components/layout/AppNav';
 import { ShiftFiltersBar } from '@/components/shifts/ShiftFilters';
 import { ShiftCard } from '@/components/shifts/ShiftCard';
 import { Button, EmptyState, ErrorState, FullLoader } from '@/components/ui';
-import type { EmployerProfile, Shift } from '@/types/core';
+import type { Shift } from '@/types/core';
+import type { EmployerProfile } from '@/types';
 
 export default function WorkerFeedPage() {
   const router = useRouter();

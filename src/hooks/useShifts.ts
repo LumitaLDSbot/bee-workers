@@ -3,7 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useGeolocation } from '@/hooks/useGeolocation';
-import type { Shift, EmployerProfile, Checkin, Application } from '@/types/core';
+import type { Shift, Checkin, Application } from '@/types/core';
+import type { EmployerProfile } from '@/types';
 
 export interface ShiftFilters {
   profession: string;

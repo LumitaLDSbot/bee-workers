@@ -62,9 +62,13 @@ export interface EmployerProfile {
   verification_status: VerificationStatus;
 }
 
-export type ActionResult<T = undefined> =
-  | { success: true; data?: T; redirect?: string }
-  | { success: false; error: string; fieldErrors?: Record<string, string[]> };
+export type ActionResult<T = undefined> = {
+  success: boolean;
+  data?: T;
+  redirect?: string;
+  error?: string;
+  fieldErrors?: Record<string, string[]>;
+};
 
 export interface GeocodeResult {
   lat: number;
